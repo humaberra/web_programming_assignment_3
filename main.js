@@ -1,0 +1,35 @@
+import { Student } from './models.js';
+import { fetchStudents } from './database.js';
+import { calculateClassAverage, findTopStudent, filterStudents } from './analytics.js';
+
+fetchStudents((rawData) => {
+  // Ham veriyi Student sınıfı objelerine dönüştürüyoruz
+  const students = rawData.map(data => new Student(data.id, data.name, data.courses));
+
+  console.log("Testing Immutability:");
+  console.log(`Original ID: ${students[0].id}`);
+  console.log("Attempting to change ID to 999...");
+  
+  // ID'yi değiştirmeyi deniyoruz (Object.defineProperty sayesinde değişmeyecek)
+  try {
+    students[0].id = 999;
+  } catch (error) {}
+
+  console.log(`Final ID: ${students[0].id} (Success: ID did not change)\n`);
+
+  console.log("--- Analytics Report ---");
+  
+  const avg101 = calculateClassAverage(students, 101);
+  console.log(`Class Average for Course 101: ${Number(avg101.toFixed(2))}`);
+
+  const topStudent = findTopStudent(students);
+  console.log(`Top Student: ${topStudent.name} (Average: ${topStudent.getAverage()})`);
+
+  // filterStudents higher-order fonksiyonunu kullanarak filtreleme
+  const studentsIn102 = filterStudents(students, student => 
+    student.courses.some(c => c.courseId === 102)
+  );
+  
+  const names102 = studentsIn102.map(s => s.name).join(", ");
+  console.log(`Students in Course 102: ${names102}`);
+});
