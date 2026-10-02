@@ -11,3 +11,6 @@ This project is divided into four main JavaScript modules to separate concerns:
 - Configuring the Node.js environment to properly handle ES6 module imports across different files.
 - Understanding how to apply `Object.defineProperty()` effectively inside a class constructor to lock down specific properties (making the ID read-only).
 - Chaining higher-order array methods (`filter`, `reduce`, `some`) in `analytics.js` to accurately calculate specific course averages without modifying the original arrays.
+- ## Technologies Used
+- JavaScript (ES6 Modules)
+- Node.js
