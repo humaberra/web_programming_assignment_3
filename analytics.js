@@ -1,3 +1,4 @@
+// Calculates the average score of all students for a specific course
 export function calculateClassAverage(students, courseId) {
   const studentsInCourse = students.filter(student =>
     student.courses.some(c => c.courseId === courseId)
