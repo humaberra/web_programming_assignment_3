@@ -1,6 +1,7 @@
 export class Student {
   constructor(id, name, courses = []) {
     // Enforcing immutability for the id property (Hocanın istediği Object.defineProperty kuralı)
+   // This strict rule prevents the ID from being modified or deleted.
     Object.defineProperty(this, 'id', {
       value: id,
       writable: false,
